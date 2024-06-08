@@ -42,6 +42,7 @@ Here's the updated API Endpoints section in the `README.md`:
 |---------------------------|-------------|-----------------------------------------------------------------------|
 | /                         | GET         | Returns a greeting from the server                                    |
 | /chat                     | GET         | Returns a greeting from the chat router                               |
+| /chat/process-text        | POST        | Processes a text input in the body and gives output as a string       |
 | /chat/process-text-stream | POST        | Processes a text input in the body as a stream using the Gemini model |
 | /chat/process-image       | POST        | Processes an image input with a prompt in form-data using the Gemini model |
 
