@@ -6,7 +6,7 @@ import { history } from "../constants/history.js"
 
 // For text-only input, use the gemini-pro model
 const model = genAIInit.getGenerativeModel({ model: "gemini-1.5-flash" })
-export async function geminiTextStream(req, res) {
+export async function geminiTextStream(req, res) {  // /chat/process-text-stream
     try {
         res.writeHead(200, {
             'Content-Type': 'text/event-stream',
@@ -35,7 +35,7 @@ export async function geminiTextStream(req, res) {
     }
 }
 
-export async function geminiChatText(req, res) {
+export async function geminiChatText(req, res) {  // /chat/process-chat-text
     try {
         const { prompt } = req.body;
         if (!prompt) {
@@ -81,7 +81,7 @@ export async function geminiChatText(req, res) {
     }
 }
 
-export async function geminiImageInput(req, res) {
+export async function geminiImageInput(req, res) {  // /chat/process-image
     try {
         const { prompt } = req.body;
         if (!prompt) {
@@ -121,7 +121,7 @@ export async function geminiImageInput(req, res) {
     }
 }
 
-export async function geminiAudioInput(req, res) {
+export async function geminiAudioInput(req, res) {  // /chat/process-audio
     try {
         const { prompt } = req.body;
         if (!prompt) {

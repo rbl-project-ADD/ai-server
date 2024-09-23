@@ -38,13 +38,15 @@ Here's the updated API Endpoints section in the `README.md`:
 
 ## API Endpoints 🛣️📡
 
-| Route                     | HTTP Method | Description                                                           |
-|---------------------------|-------------|-----------------------------------------------------------------------|
-| /                         | GET         | Returns a greeting from the server                                    |
-| /chat                     | GET         | Returns a greeting from the chat router                               |
-| /chat/process-text        | POST        | Processes a text input in the body and gives output as a string       |
-| /chat/process-text-stream | POST        | Processes a text input in the body as a stream using the Gemini model |
-| /chat/process-image       | POST        | Processes an image input with a prompt in form-data using the Gemini model |
+| Route                     | HTTP Method | Description                                                                 |
+|---------------------------|-------------|-----------------------------------------------------------------------------|
+| /                         | GET         | Returns a greeting from the server                                          |
+| /chat                     | GET         | Returns a greeting from the chat router                                     |
+| /chat/process-chat-text    | POST        | Processes text and an optional file (image/audio) in the body, returning a string response |
+| /chat/process-text-stream  | POST        | Processes text input in the body as a streaming response using the Gemini model |
+| /chat/process-image        | POST        | Processes an image (with a prompt) sent via form-data using the Gemini model |
+| /chat/process-audio        | POST        | Processes an audio file (with a prompt) sent via form-data using the Gemini model |
+
 
 
 ### Example Usage
