@@ -44,19 +44,41 @@ export async function geminiChatText(req, res) {
             });
         }
 
+        let message = [prompt];
+
+        if (req.file) {
+            const filePath = path.resolve(req.file.path);
+            const fileBuffer = fs.readFileSync(filePath);
+            const fileBase64 = fileBuffer.toString('base64');
+            const fileMimeType = req.file.mimetype;
+
+            const file = {
+                inlineData: {
+                    data: fileBase64,
+                    mimeType: fileMimeType,
+                },
+            };
+
+            message.push(file);
+        }
 
         const chat = model.startChat({
             history: history,
         });
-        let result = await chat.sendMessage(prompt);
-        res.json(result.response.text())
-    } catch (err) {
-        console.log('error in Gemini chat: ', err)
-        res.status(500).json({
-            error: 'internal server error'
-        })
-    }
+        let result = await chat.sendMessage(message);
+        // chat.getHistory().then((history) => {
+        //     res.json({ ans: result.response.text(), history: history });
+        // })
 
+        fs.unlinkSync(filePath);
+        res.json(result.response.text());
+
+    } catch (err) {
+        console.log('error in Gemini chat: ', err);
+        res.status(500).json({
+            error: 'internal server error',
+        });
+    }
 }
 
 export async function geminiImageInput(req, res) {
@@ -126,9 +148,11 @@ export async function geminiAudioInput(req, res) {
             },
         };
         const chat = model.startChat({
-            history:history,
+            history: history,
         });
-        let result = await chat.sendMessage([prompt,audio]);
+        let result = await chat.sendMessage([prompt, audio]);
+
+        fs.unlinkSync(audioPath);
         res.json(result.response.candidates[0].content.parts[0].text)
     } catch (err) {
         console.log('error in Gemini chat: ', err)

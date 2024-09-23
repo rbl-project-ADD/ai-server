@@ -10,8 +10,8 @@ const router = express.Router()
 router.get('/', (req, res) => {
     res.send('Hello World! from chatRouter.js ')
 })
-router.post('/process-text-stream', geminiTextStream) //outputs text as stream
-router.post('/process-text', upload.single('image'),geminiChatText) //outputs text as string
+router.post('/process-text-stream', geminiTextStream)
+router.post('/process-chat-text', upload.single('file'),geminiChatText)
 router.post('/process-image', upload.single('image'), geminiImageInput)
 router.post('/process-audio', upload.single('audio'), geminiAudioInput)
 
