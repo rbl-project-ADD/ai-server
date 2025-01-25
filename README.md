@@ -1,10 +1,21 @@
-# AI Server 🚀
+# AI Server for Language Learning 🚀
 
-This is a server-side application for the RBL Project, utilizing Google's Generative AI for text and image processing. The server is built with Node.js and Express.
+A robust Node.js/Express server leveraging Google's Gemini AI for advanced language learning features. This server powers translation, flash card generation, and grammar exercises for Sanskrit, Hindi, and English languages.
+
+## Features 🌟
+
+- **Translation Service**: Three-way translation between Sanskrit, Hindi, and English
+- **Flash Cards**: AI-powered flash card generation for vocabulary learning
+- **Grammar Exercises**: Dynamic generation of grammar exercises with multiple difficulty levels
+- **Streaming Support**: Real-time text processing capabilities
 
 ## Getting Started 🏁
 
-These instructions will help you set up the project on your local machine for development and testing purposes.
+### Prerequisites
+
+- Node.js (v14 or higher)
+- npm or yarn
+- Google Gemini API key
 
 ### Installation 🔧
 
@@ -14,51 +25,61 @@ These instructions will help you set up the project on your local machine for de
    git clone https://github.com/rbl-project-ADD/ai-server.git
    ```
 
-2. **Navigate to the project directory:**
+2. **Set up environment:**
 
    ```sh
    cd ai-server
-   ```
-
-3. **Install the dependencies:**
-
-   ```sh
    npm install
+   cp .env.example .env
    ```
 
-4. **Create a `.env` file in the root directory and add the following environment variables:**
+3. **Configure environment:**
+   Add your Gemini API key to `.env`:
 
-   ```sh
-   GEMINI_API_KEY="your_api_key_here"
+   ```
+   GEMINI_API_KEY=your_api_key_here
    ```
 
-5. **Start the server:**
+4. **Start the server:**
    ```sh
    npm start
    ```
 
-Here's the updated API Endpoints section in the `README.md`:
+## API Endpoints 🛣️
 
-## API Endpoints 🛣️📡
+### Translation Service
 
-| Route                     | HTTP Method | Description                                                                                |
-| ------------------------- | ----------- | ------------------------------------------------------------------------------------------ |
-| /                         | GET         | Returns a greeting from the server                                                         |
-| /chat                     | GET         | Returns a greeting from the chat router                                                    |
-| /chat/process-chat-text   | POST        | Processes text and an optional file (image/audio) in the body, returning a string response |
-| /chat/process-text-stream | POST        | Processes text input in the body as a streaming response using the Gemini model            |
-| /chat/process-image       | POST        | Processes an image (with a prompt) sent via form-data using the Gemini model               |
-| /chat/process-audio       | POST        | Processes an audio file (with a prompt) sent via form-data using the Gemini model          |
+| Endpoint            | Method | Description                                                           |
+| ------------------- | ------ | --------------------------------------------------------------------- |
+| `/translate/stream` | POST   | Stream translation results                                            |
+| `/translate/file`   | POST   | Process file for translation (if no file the text will be translated) |
 
-### Example Usage
+### Flash Cards
 
-1. **Process Text Stream:**
+| Endpoint               | Method | Description                     |
+| ---------------------- | ------ | ------------------------------- |
+| `/flashcards/generate` | POST   | Generate vocabulary flash cards |
 
-   ```sh
-   curl -X POST http://localhost:3000/chat/process-text-stream -H "Content-Type: application/json" -d '{"prompt": "Your prompt here"}'
-   ```
+### Grammar Exercises
 
-2. **Process Image:**
-   ```sh
-   curl -X POST http://localhost:3000/chat/process-image -F "image=@path_to_your_image" -F "prompt=Do these look store-bought or homemade?"
-   ```
+| Endpoint            | Method | Description                |
+| ------------------- | ------ | -------------------------- |
+| `/grammar/generate` | POST   | Generate grammar exercises |
+
+## Usage Examples 📝
+
+### Generate Flash Cards
+
+```sh
+curl -X POST http://localhost:8000/flashcards/generate \
+  -H "Content-Type: application/json" \
+  -d '{"prompt": "Create flash cards for basic Sanskrit greetings"}'
+```
+
+### Generate Grammar Exercise
+
+```sh
+curl -X POST http://localhost:8000/grammar/generate \
+  -H "Content-Type: application/json" \
+  -d '{"prompt": "Create a beginner level Sanskrit exercise"}'
+```

@@ -2,9 +2,7 @@ import express from 'express';
 import multer from 'multer';
 import {
   geminiTextStream,
-  geminiImageInput,
   geminiChatText,
-  geminiAudioInput,
 } from '../controller/translator.controller.js';
 
 const upload = multer({ dest: 'uploads/' });

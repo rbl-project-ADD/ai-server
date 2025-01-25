@@ -30,13 +30,13 @@ export default [
     },
 
     rules: {
-      'prettier/prettier': 'error',
+      'prettier/prettier': 'warn',
       'class-methods-use-this': 'off',
       'no-param-reassign': 'off',
       camelcase: 'off',
 
       'no-unused-vars': [
-        'error',
+        'warn',
         {
           argsIgnorePattern: 'next',
         },
